@@ -6,10 +6,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/styles.css'); ?>">
 </head>
 <body>
-    
-    <?php if ($this->session->flashdata('error')): ?>
-        <p><?php echo $this->session->flashdata('error'); ?></p>
-    <?php endif; ?>
     <form action="<?php echo site_url('admin/loginVerificacion'); ?>" method="post">
         <h2>Iniciar Sesión</h2>
         <label for="usuario">Usuario:</label>
@@ -18,6 +14,11 @@
         <label for="contrasenia">Contraseña:</label>
         <input type="password" name="contrasenia" id="contrasenia" required>
         <br>
+
+        <?php if ($this->session->flashdata('error')): ?>
+            <p><?php echo $this->session->flashdata('error'); ?></p>
+        <?php endif; ?>
+
         <button type="submit">Entrar</button>
     </form>
 </body>

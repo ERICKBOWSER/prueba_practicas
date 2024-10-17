@@ -3,16 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
 
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('Usuario_model');
+    }
+
     // Login usuario
     public function login(){
         $this->load->view("admin/login");
     }
 
     public function loginVerificacion(){
+       
         $usuario = $this->input->post("usuario");
         $pass = md5($this->input->post("contrasenia"));
 
-        $this->load->model('Usuario_model');
         $usuarioData = $this->Usuario_model->getUsuario($usuario);
 
         // Si el inicio de sesión es correcto redirige a la view de empleados
@@ -25,11 +30,12 @@ class Admin extends CI_Controller {
             ];
             $this->session->set_userdata($sessionData);
 
+            
             // Redirigir a empleados
-            redirect('empleados');
+            redirect('Empleados_c');
         } else {
             $this->session->set_flashdata('error', 'Usuario o contraseña incorrectos'); // función de la libreria session
-            redirect('admin/login');
+            $this->load->view("admin/login");
         }
     }
 
@@ -46,8 +52,7 @@ class Admin extends CI_Controller {
     public function apiLogin() {
         $usuario = $this->input->post('usuario');
         $contrasenia = md5($this->input->post('contrasenia')); // Encriptamos la contraseña con md5
-    
-        $this->load->model('Usuario_model');
+
         $usuarioData = $this->Usuario_model->getUsuario($usuario);
     
         if ($usuarioData && $usuarioData->contrasenia === $contrasenia) {

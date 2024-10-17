@@ -10,7 +10,7 @@ class Empleados extends CI_Model {
         return $this->db->where('id_usuario', $id)->get('empleados')->row();
     }
 
-    public function createEmpleado($nombre, $apellido1, $apellido2, $direccion) {
+    public function create($nombre, $apellido1, $apellido2, $direccion) {
         $data = [
             'nombre' => $nombre,
             'apellido1' => $apellido1,
@@ -20,7 +20,7 @@ class Empleados extends CI_Model {
         $this->db->insert('empleados', $data);
     }
 
-    public function updateEmpleado($id, $nombre, $apellido1, $apellido2, $direccion) {
+    public function update($id, $nombre, $apellido1, $apellido2, $direccion) {
         $data = [
             'nombre' => $nombre,
             'apellido1' => $apellido1,
@@ -31,7 +31,7 @@ class Empleados extends CI_Model {
         $this->db->update('empleados', $data);
     }
 
-    public function deleteEmpleado($id) {
+    public function delete($id) {
         $this->db->where('id_usuario', $id);
         $this->db->delete('empleados');
     }
